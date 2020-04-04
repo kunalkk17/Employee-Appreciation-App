@@ -9,6 +9,7 @@ import Profile from './components/Profile'
 import MainForm from './components/MainForm'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import UserDetail from './components/UserDetail'
 
 class App extends Component {
   render() {
@@ -20,8 +21,9 @@ class App extends Component {
           <div className="container">
             <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/profile" component={Profile} />
-            {/* <Route exact path="/main" component={MainForm} /> */}
+            {/* <Route exact path="/profile" component={Profile} /> */}
+            <Route exact path="/main/:id" component={MainForm} />
+            <Route exact path="/user/:id" component={UserDetail} />
           </div>
         </div>
       </Router>

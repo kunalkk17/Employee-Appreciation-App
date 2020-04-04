@@ -1,48 +1,146 @@
-import React from 'react';
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Segment,
-    } from 'semantic-ui-react';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
-class MainForm extends React.Component
-{
-    constructor(props)
-    {
+import React from 'react'
+import th from './th.jpg';
+import { Button,Grid,Divider,Segment,
+    Container, GridColumn,Label,Input } from 'semantic-ui-react';
+import Search  from './Search'
+import UserList from './UserList'
+import MainUserCoinHistroy from './MainUserCoinHistory';
+   
+class MainForm extends React.Component{
+    constructor(props){
         super(props);
-        this.state ={isLoginOpen: true, isRegisterOpen:false};
+        this.state={
+            userlist: [{
+                id:'101',
+                Username:'shefali gupta',
+                EmployeeCode:'1198',
+                Department:'FAS',
+                TotalRecieveCoin:'70',
+                coinsDetails:[{
+                    id:'101',
+                    SenderName:'AkshitaSharma',
+                    coins:'2',
+                    comment:'she helps how to import data from api'
+                },
+                {
+                    id:'1001',
+                    SenderName:'AkshitaSharma',
+                    coins:'2',
+                    comment:'she helps how to import data from api'
+                },
+                {
+                    id:'1002',
+                    SenderName:'AkshitaSharma',
+                    coins:'2',
+                    comment:'she helps how to import data from api'
+                },{
+                    id:'1003',
+                    SenderName:'AkshitaSharma',
+                    coins:'2',
+                    comment:'she helps how to import data from api'
+                }]
+            },
+            {
+                id:'1004',
+                Username:'Akshita gupta',
+                EmployeeCode:'1190',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            },
+            {
+                id:'102',
+                Username:'kunal kumar',
+                EmployeeCode:'1195',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            },
+            {
+                id:'104',
+                Username:'Aradhya Kansal',
+                EmployeeCode:'124',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            },
+            {
+                id:'106',
+                Username:'Gaurav sharma',
+                EmployeeCode:'125',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            },
+            {
+                id:'107',
+                Username:'Nikhil gupta',
+                EmployeeCode:'126',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            },
+            {
+                id:'108',
+                Username:'Toshi jain',
+                EmployeeCode:'128',
+                Department:'FAS',
+                TotalRecieveCoin:'60',
+                coinsDetails:''
+            }
+            ],
+            OtherUsers:''
+        }
+
     }
-  
-    showLoginBox(){
-      this.setState({isLoginOpen: true ,isRegisterOpen:false})
+    handlUser = e=>{
+        console.log(e.target.value)
+        this.setState({OtherUsers:e.target.value})
     }
-    showRegisterBox(){
-      this.setState({isRegisterOpen: true ,isLoginOpen:false})
-    }
- render()
- {
-   return(      
-     <Grid centered >
-       <Header as= "h1" >
-        </Header>
-        <Header as= "h1" color="blue" textAlign="center">
-            Employee Appriciation App
-        </Header>
-       <Grid.Row>
-        <Segment>
-          <Form>
-            <Button onClick={this.showLoginBox.bind(this)}>Login</Button>
-            <Button onClick={this.showRegisterBox.bind(this)}>Register</Button>
-          </Form>
+    render(){
+        const {id}= this.props.match.params
+         let filterMainUser = this.state.userlist?this.state.userlist.filter(user =>{
+            return user.EmployeeCode.includes(id)}):null                               
+            
+        let mainuserCoinHistory = filterMainUser?filterMainUser.map(x =>(x.coinsDetails)):null
+        let userDetails = this.state.userlist.filter(user =>{ return user.EmployeeCode !==id})
+        let filterUsers = userDetails.filter(user =>{
+            return user.Username.toLowerCase().includes(this.state.OtherUsers.toLowerCase())})
+return(
+<Container>
+    <Search handlUser={this.handlUser}/>
+    <Segment placeholder>
+        <Grid centered columns={2}>
+            <UserList list={filterUsers}/>
+            <Grid.Column verticalAlign='middle'>
+                <Grid.Row>
+                    <img src={th} width='100px'/>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid columns={2}>
+                        <GridColumn>
+                            <Label> User Name</Label><Input>{filterMainUser?filterMainUser.map(x =>(x.Username)):null}</Input><br/>
+                       <br/><Label> EmployeeCode</Label><Input> {filterMainUser.map(x =>(x.EmployeeCode))}</Input> <br/>
+                        </GridColumn>
+                        <GridColumn>
+                            <Label> Department</Label><Input>{filterMainUser.map(x =>(x.Department))}</Input><br/>
+                            <br/><Label>Coins</Label><Input>{filterMainUser.map(x =>(x.TotalRecieveCoin))}</Input>
+                        </GridColumn>
+                    </Grid>
+                </Grid.Row>
+                <Grid.Row>
+                      <MainUserCoinHistroy user={mainuserCoinHistory}/>
+                </Grid.Row>
+            </Grid.Column>
+
+            </Grid>
+            <Divider vertical></Divider>
         </Segment>
-       </Grid.Row>
-       {this.state.isLoginOpen && <LoginForm/>}
-       {this.state.isRegisterOpen && <RegisterForm/>}
-    </Grid>
-  );
- }
+</Container>   
+    );
 }
+}
+
 export default MainForm;
+
+ 
