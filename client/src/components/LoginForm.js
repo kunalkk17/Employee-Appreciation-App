@@ -68,7 +68,7 @@ class LoginForm extends React.Component
         //console.log("inside login")
         if (res) {
           console.log(res)
-          this.props.history.push(`/profile`)
+          this.props.history.push(`/main/${this.state.employeeId}`)
         }
       })
     }
