@@ -7,12 +7,9 @@ const UserSchema = new Schema({
     employeeId:{type:Number,required:true},
     password: {type:String, required:true},
     coinBalance:{type:Number, default:100},
-    recievedCoins:{type:Number, required:false},
-    coinHistory:[{
-                   noOfCoins:{type:Number,default:null},
-                   senderId:{type:Number,default:null},
-                   reason:{type:String,default:null}
-                }],
+    rewards:{type:Number, default:0},
+    rewardsHistory:[],
+    coinHistory:[],
     date: {type:Date, default:Date.now}
 })
 

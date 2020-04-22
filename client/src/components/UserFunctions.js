@@ -33,7 +33,7 @@ export const login = user => {
     })
 }
 
-export const getProfile = (token) => {
+export const getUsers = (token) => {
   return axios
     .get('http://localhost:5000/api/users/profile', {
       headers: { Authorization: token }
@@ -45,4 +45,11 @@ export const getProfile = (token) => {
     .catch(err => {
       console.log(err)
     })
+}
+
+export const transferCoins=(users)=>{
+  return axios.post('http://localhost:5000/api/users/transfercoins',users).
+  then(response => {
+    console.log("Coins Transferred");
+  })
 }

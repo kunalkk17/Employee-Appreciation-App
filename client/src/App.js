@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar1'
 import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
-import Profile from './components/Profile'
+import UsersList from './components/UsersList'
 import MainForm from './components/MainForm'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
@@ -21,9 +21,10 @@ class App extends Component {
           <div className="container">
             <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/login" component={LoginForm} />
-            {/* <Route exact path="/profile" component={Profile} /> */}
+            <Route exact path="/home" component={UsersList} />
             <Route exact path="/main/:id" component={MainForm} />
             <Route exact path="/user/:id" component={UserDetail} />
+            <Route exact path="/about" component={Landing} />
           </div>
         </div>
       </Router>

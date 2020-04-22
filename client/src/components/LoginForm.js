@@ -58,17 +58,19 @@ class LoginForm extends React.Component
   }
 
   handleSubmit = e =>{
+    console.log("hellooo")
     e.preventDefault();
     if( this.valid() &&formValid(this.state.errors)){
+      console.log("valid true")
       const user = {
         employeeId: this.state.employeeId,
         password: this.state.password
       }
       login(user).then(res => {
-        //console.log("inside login")
+        console.log("inside login")
         if (res) {
           console.log(res)
-          this.props.history.push(`/main/${this.state.employeeId}`)
+          this.props.history.push(`/home`)
         }
       })
     }
@@ -91,26 +93,26 @@ class LoginForm extends React.Component
             break;
         }
 
-        this.setState({errors,[name]:value},()=>console.log(errors))
+        this.setState({errors,[name]:value})
     }
    render()
    {
      const{errors} = this.state;
      
      return(
-    <Grid centered columns={4}>
-     <Grid.Column>
+      <Grid textAlign='center' style={{ height: '100vh' }} >
+     <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" textAlign="center">
             Login
           </Header>
-       <Segment>
-          <Form size="small" >
-            employeeId<Form.Input
+       <Form size='large'>
+        <Segment stacked>
+            <Form.Input
                       name ="employeeId"
                       fluid
                       icon="user"
                       iconPosition="left"
-                      placeholder="employeeId"
+                      placeholder="Employee Id"
                       type ="text"
                       required
                       onChange={this.handleChange}
@@ -119,7 +121,7 @@ class LoginForm extends React.Component
           {errors.employeeIdErr.length>0 &&
             <Message color="red   ">{errors.employeeIdErr}</Message>
           }
-            password<Form.Input
+            <Form.Input
               name="password" 
               fluid
               icon="lock"
@@ -130,16 +132,17 @@ class LoginForm extends React.Component
               onChange={this.handleChange}
             />
             {errors.passwordErr.length>0 &&
-            <Message color="red   ">{errors.passwordErr}</Message>
+            <Message color="red">{errors.passwordErr}</Message>
           }
-            <Button   fluid size="large" type= "submit" onClick={this.handleSubmit}>
+            <Button   fluid size="large" type= "submit" onClick={this.handleSubmit} color='blue'>
               Login
            </Button>
           
-         </Form>
+         
         </Segment>
+        </Form>
         <Message>
-         Dont have an account? <Button><Link to="/Register">Register</Link></Button>
+         Dont have an account? <Link to="/Register">Register</Link>
         </Message>
       </Grid.Column>
     

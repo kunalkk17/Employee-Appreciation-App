@@ -6,6 +6,7 @@ const keys = require("../../config/keys");
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const sendMail = require("../../validation/email")
 const User = require("../../Models/User") 
 
 
@@ -132,6 +133,64 @@ router.post("/login", (req, res) => {
       });
     }
   });
+
+  router.post('/transfercoins',(req,res)=>{
+    console.log("REQ BODY :", req.body);
+    const recieverData= req.body.reciever;
+    const senderData= req.body.sender;
+    console.log("reciever: ",recieverData);
+    console.log("sender: ",senderData);
+    recieverId=recieverData._id;
+    senderId=senderData._id;
+    //Reciever Update
+    User.findByIdAndUpdate(recieverId, recieverData, function(
+      err,
+      reciever
+    ) {
+      if (err) {
+        console.log("err", err);
+        res.status(500).send(err);
+      } else {
+        console.log("Reciever Updated");
+        //Sender Update
+        User.findByIdAndUpdate(senderId, senderData, function(
+          err,
+          sender
+        ) {
+          if (err) {
+            console.log("err", err);
+            res.status(500).send(err);
+          } else {
+            console.log("Sender Updated");
+            const obj={sender,reciever}
+            res.send(obj);
+          }
+        })
+        
+      }
+    })
+  })
+
+  router.post('/email',(req,res)=>{
+    console.log("=========Req.Body=======",req.body)
+    var name = req.body.name
+    var email = req.body.email
+    var message = req.body.message
+    var content = `name: ${name} \n email: ${email} \n message: ${message} `
+    //console.log("Req.body.Namer",eq.body.name)
+
+    var mail = {
+      from: name,
+      to: email,  //Change to email address that you want to receive messages on
+      subject: 'Employee appreciation App Testing',
+      text: content
+    }
+    const response = sendMail(mail);
+    console.log(response);
+    return res.json(response);
+  })
+      
+   
   
   
 
