@@ -26,10 +26,10 @@ class Landing extends Component {
 
     const userLink = (
         <div class="ui fluid small inverted menu">
-          <Link to="/home" class="item">
+          <Link to="/home" class="item"><i class="home icon"></i>
             Home
           </Link>
-          <Link to="/about" class="item">
+          <Link to="/about" class="item"><i class="info icon"></i>
             About
           </Link>
           {/* <div class="ui category search item">
@@ -41,7 +41,7 @@ class Landing extends Component {
               </div> */}
               <div class="right menu">
               <div class="item">
-              <div class="ui right floated primary button" onClick={this.logOut.bind(this)}>
+              <div class="ui right floated primary button" onClick={this.logOut.bind(this)} style={ {background:'#1EA896',color:'white'}}>
               <i class="sign out alternate icon"></i>
                               Sign out
                             </div>

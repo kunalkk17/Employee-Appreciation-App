@@ -129,7 +129,9 @@ class Profile extends React.Component<{}, UserState> {
                        onClose={this.closeUserProfile}>
     <Modal.Header>
       <Image wrapped size='tiny' src={Logo} />
-      {this.state.usersData[this.state.userProfileIndexToShow].name}<div><Label>IT Department</Label><Label>Employee Id : {item.employeeId}</Label></div></Modal.Header>
+      {this.state.usersData[this.state.userProfileIndexToShow].name}<div>
+        <Label>IT Department</Label><Label>Employee Id : {item.employeeId}</Label>
+        </div></Modal.Header>
     <Modal.Content image>
       
       <Modal.Description>
@@ -145,8 +147,8 @@ class Profile extends React.Component<{}, UserState> {
   </Modal>
                   
                   <div class="meta">
-                    <span class="ui label" >Accounts</span>
-                    <span class="ui label" style={{background: "#1ea896",color: "white"}}><i class="copyright icon"></i> {item.rewards} Coins </span>
+                    <span class="ui label" >Accounts</span><Label>Employee Id: {item.employeeId}</Label><Label>{item.team}</Label>
+                    <span class="ui label" style={{background: "rgb(212, 194, 25)",color: "white"}}><i class="copyright icon"></i> {item.rewards} Coins </span>
                   </div>
                   <div class="description">
                     <p></p>

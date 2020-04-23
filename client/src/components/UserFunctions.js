@@ -8,7 +8,11 @@ export const register = newUser => {
       employeeId: newUser.employeeId,
       userName: newUser.userName,
       password: newUser.password,
-      password2:newUser.password2
+      password2:newUser.password2,
+      department:newUser.department,
+      team:newUser.team,
+      teamLead:newUser.teamLead,
+      emailId:newUser.emailId
     })
     .then(response => {
       console.log('Registered')

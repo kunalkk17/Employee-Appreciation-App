@@ -134,7 +134,7 @@ class LoginForm extends React.Component
             {errors.passwordErr.length>0 &&
             <Message color="red">{errors.passwordErr}</Message>
           }
-            <Button   fluid size="large" type= "submit" onClick={this.handleSubmit} color='blue'>
+            <Button   fluid size="large" type= "submit" onClick={this.handleSubmit} style={ {background:'#1EA896',color:'white'}} >
               Login
            </Button>
           

@@ -61,7 +61,7 @@ class Profile extends Component {
 		<div class="lower-container">
 			<div>
 				<h3>{this.props.activeUser.name}</h3>
-        <div style={{textAlign:"center"}}><Label>IT Department</Label><Label>Employee Id : 1198</Label></div>
+    <div style={{textAlign:"center"}}><Label>IT Department</Label><Label>Employee Id : {this.props.activeUser.employeeId}</Label></div>
 				<h5>Rewards &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; Coin Balance</h5>
 			</div>
 			<div>

@@ -111,3 +111,12 @@ body{
 	margin-top: 10px;
 	align-content: left;
 }
+
+::-webkit-input-placeholder {
+	font-size: 14px;
+	color: #8b8b8b !important;
+	 /* text-transform: uppercase;
+	text-transform: uppercase;
+	text-align: center;  */
+	font-weight: bold;
+   }

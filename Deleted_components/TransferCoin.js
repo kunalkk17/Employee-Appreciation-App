@@ -83,9 +83,9 @@ class TransferCoin extends Component {
     console.log("======Update CoinHistory====",updateCoinHistory);
     console.log("======Update Rewards====",updateRewardsHistory);
      sender.coinBalance=sender.coinBalance-this.state.coinInput;
-     sender.coinHistory.unshift(this.state.updateCoinHistory);
+     sender.coinHistory.unshift(updateCoinHistory);
      reciever.rewards=parseInt(this.state.coinInput)+parseInt(reciever.rewards);
-     reciever.rewardsHistory.unshift(this.state.updateRewardsHistory);
+     reciever.rewardsHistory.unshift(updateRewardsHistory);
      console.log("Updated Sender",sender);
      console.log("Updated Reciever",reciever);
      const users={sender:sender,reciever:reciever}

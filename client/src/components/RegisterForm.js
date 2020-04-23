@@ -102,9 +102,11 @@ class RegisterForm extends React.Component {
       }
 
       register(newUser).then(res => {
-        console.log('user registered')
-        this.props.history.push(`/login`)
+        console.log(res);
+        //console.log('user registered')
         alert("form has been submitted");
+        this.props.history.push(`/login`)
+        
       })
       
 
@@ -130,9 +132,9 @@ class RegisterForm extends React.Component {
             Register
           </Header>
           <Segment>
-            <Form size="small">
+            <Form size="large">
 
-              FullName<Form.Input
+              <Form.Input
                 name="name"
                 fluid size="small"
                 icon="user"
@@ -144,12 +146,12 @@ class RegisterForm extends React.Component {
                 <p style={{ color: 'red' }}> {this.state.errors.nameErr}</p>
 
               }
-              UserName<Form.Input
+              <Form.Input
                 name="userName"
                 fluid size="small"
                 icon="user"
                 iconPosition="left"
-                placeholder="Name"
+                placeholder="User Name"
                 onChange={this.handleChange}
               />
               {this.state.errors.userNameErr.length > 0 &&
@@ -157,7 +159,7 @@ class RegisterForm extends React.Component {
               }
               <Grid columns={2}>
                 <GridColumn  >
-                  Employee Id<Form.Input
+                  <Form.Input
                     name="employeeId"
                     placeholder="Employee Id"
                     type="text"
@@ -168,7 +170,7 @@ class RegisterForm extends React.Component {
                   }
                 </GridColumn>
                 <Grid.Column  >
-                  Department<Dropdown
+                  <Dropdown
                     placeholder='Department'
                     name="department"
                     onChange={this.handleChange}
@@ -182,7 +184,7 @@ class RegisterForm extends React.Component {
               </Grid><br />
               <Grid columns={2}>
                 <GridColumn>
-                  Team<Dropdown name="team" placeholder='Team' search selection options={TeamOption}
+                 <Dropdown name="team" placeholder='Team' search selection options={TeamOption}
                     onChange={this.handleChange} >
                   </Dropdown>
                   {this.state.errors.teamErr.length > 0 &&
@@ -192,24 +194,24 @@ class RegisterForm extends React.Component {
                   }
                 </GridColumn>
                 <GridColumn>
-                  Team Leader<Form.Input name="teamlead" placeholder={this.state.teamlead} disabled={this.state.isTeamLead}
+                  <Form.Input name="teamlead" placeholder={this.state.teamlead} disabled={this.state.isTeamLead}
                   focus readOnly>
 
                   </Form.Input>
                 </GridColumn>
 
               </Grid>
-              EmailID<Form.Input
+              <Form.Input
                 name="email"
                 fluid
-                placeholder="EmailID"
+                placeholder="Email ID"
                 onChange={this.handleChange}
               />
               {this.state.errors.emailErr.length > 0 &&
                 <p style={{ color: 'red' }}> {this.state.errors.emailErr}</p>
               }
 
-              Password<Form.Input
+              <Form.Input
                 name="password"
                 fluid
                 icon="lock"
@@ -221,7 +223,7 @@ class RegisterForm extends React.Component {
               {this.state.errors.passwordErr.length > 0 &&
                 <p style={{ color: 'red' }}> {this.state.errors.passwordErr}</p>
               }
-             confirm Password<Form.Input
+             <Form.Input
                 name="password2"
                 fluid
                 icon="lock"
@@ -233,7 +235,7 @@ class RegisterForm extends React.Component {
               {this.state.errors.password2Err.length > 0 &&
                 <p style={{ color: 'red' }}> {this.state.errors.password2Err}</p>
               }
-              <Button fluid size="large" onClick={this.handleSubmit} color='blue'>
+              <Button fluid size="large" onClick={this.handleSubmit} style={ {background:'#1EA896',color:'white'}}>
                 Register
               </Button>
             </Form>
