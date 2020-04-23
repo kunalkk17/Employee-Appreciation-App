@@ -136,7 +136,7 @@ class RegisterForm extends React.Component {
 
               <Form.Input
                 name="name"
-                fluid size="small"
+                fluid 
                 icon="user"
                 iconPosition="left"
                 placeholder="Name"
@@ -148,7 +148,7 @@ class RegisterForm extends React.Component {
               }
               <Form.Input
                 name="userName"
-                fluid size="small"
+                fluid
                 icon="user"
                 iconPosition="left"
                 placeholder="User Name"
@@ -173,6 +173,7 @@ class RegisterForm extends React.Component {
                   <Dropdown
                     placeholder='Department'
                     name="department"
+                    fluid
                     onChange={this.handleChange}
                     selection
                     options={DeptOption}
@@ -184,7 +185,7 @@ class RegisterForm extends React.Component {
               </Grid><br />
               <Grid columns={2}>
                 <GridColumn>
-                 <Dropdown name="team" placeholder='Team' search selection options={TeamOption}
+                 <Dropdown name="team" placeholder='Team' fluid search selection options={TeamOption}
                     onChange={this.handleChange} >
                   </Dropdown>
                   {this.state.errors.teamErr.length > 0 &&
