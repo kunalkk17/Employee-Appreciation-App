@@ -31,7 +31,7 @@ class TransferCoin extends Component {
         err.coinsErr =  value >5 ? "Can not Gift More than 5 coins" : "";
         break;
       case "comment":
-        err.commentErr = value.length >50 ? " Comment should not be more than 50 words " : "";
+        err.commentErr = value.length >100 ? " Comment should not be more than 50 words " : "";
         break;
       default:
         break;

@@ -100,8 +100,8 @@ class MainForm extends React.Component{
     render(){
         const {id}= this.props.match.params
          let filterMainUser = this.state.userlist?this.state.userlist.filter(user =>{
-            return user.EmployeeCode.includes(id)}):null                               
-            
+            return user.EmployeeCode.includes(id)}):null  
+                                         
         let mainuserCoinHistory = filterMainUser?filterMainUser.map(x =>(x.coinsDetails)):null
         let userDetails = this.state.userlist.filter(user =>{ return user.EmployeeCode !==id})
         let filterUsers = userDetails.filter(user =>{
