@@ -78,7 +78,7 @@ class Profile extends Component {
       </div>
       :<div><Button onClick={this.handleClick}>Show Rewards</Button>
       <Button style={activated} onClick={this.handleClick}>Show Coin Hoistory</Button>
-      <CoinHistory/>
+      <CoinHistory user={this.props.activeUser}/>
       </div>}
       
 		</div>

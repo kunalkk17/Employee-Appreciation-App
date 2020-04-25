@@ -26,15 +26,14 @@ module.exports = function sendMail(mail){
     (transporter.sendMail(mail,(err,data)=>{
         console.log("inside transporter.sendMail")
         if(err){
-            errors.msg.json(err);
+            console.log("=====Error occured in mail=======",err)
+            return err
         }
         else{
-            console.log("message sent")
+            console.log("message sent");
+            return data;
         }
-        return {
-            errors,
-            isValid: isEmpty(errors)
-          };
+        
     })
     );
 }

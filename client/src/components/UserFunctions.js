@@ -57,3 +57,11 @@ export const transferCoins=(users)=>{
     console.log("Coins Transferred");
   })
 }
+
+export const sendMail=(body)=>{
+  return axios.post('http://localhost:5000/api/users/email',body).
+  then(response => {
+    console.log("Mail Sent");
+    console.log(response);
+  })
+}

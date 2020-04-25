@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
-import { Button, Modal, Form, Grid, Radio, GridColumn, Divider } from 'semantic-ui-react'
+import { Button, Modal, Form, Grid, Radio, GridColumn, Divider,Popup } from 'semantic-ui-react'
 import {ValidateTransferCoinData} from './Validation'
-import { transferCoins } from './UserFunctions'
+import { transferCoins, sendMail } from './UserFunctions'
 class TransferCoin extends Component {
   constructor(props) {
     super(props)
@@ -84,31 +84,45 @@ class TransferCoin extends Component {
       const updateCoinHistory={
         noOfCoins:coins,
         recieverId:this.props.selectedUser._id,
-        reason:this.state.comment,
+        recieverName:this.props.selectedUser.name,
+        reason:this.state.optionValue,
+        comment:this.state.comment,
         date:currentDate
       }
       const updateRewardsHistory={
         noOfCoins:coins,
         senderId:this.props.activeUser._id,
-        reason:this.state.comment,
+        senderName:this.props.activeUser.name,
+        reason:this.state.optionValue,
+        comment:this.state.comment,
         date:currentDate
+      }
+      const mailBody={
+        name:this.props.activeUser.name,
+        email:this.props.selectedUser.emailId,
+        content:`Viola!!!!!\n ${this.props.activeUser.name} has rewarded you with ${coins} coins because ${this.state.optionValue}`
       }
 
     console.log("======Update CoinHistory====",updateCoinHistory);
     console.log("======Update Rewards====",updateRewardsHistory);
      sender.coinBalance=parseInt(sender.coinBalance)-parseInt(this.state.coins);
-     sender.coinHistory.unshift(this.state.updateCoinHistory);
+     sender.coinHistory.unshift(updateCoinHistory);
      reciever.rewards=parseInt(this.state.coins)+parseInt(reciever.rewards);
-     reciever.rewardsHistory.unshift(this.state.updateRewardsHistory);
+     reciever.rewardsHistory.unshift(updateRewardsHistory);
      console.log("Updated Sender",sender);
      console.log("Updated Reciever",reciever);
      const users={sender:sender,reciever:reciever}
+
      transferCoins(users).then(res => {
-      console.log("Coins Transferred now moving to home page")
-      if (res) {
-        console.log(res)
-        this.props.history.push(`/home`)
-      }
+      console.log("Coins Transferred now sending mail")
+      console.log("==-====mail body======",mailBody)
+      sendMail(mailBody).then(resp => {
+        console.log("Mail sent")
+         if (resp) {
+          console.log(resp)
+          this.props.history.push(`/home`)
+        }
+      })
     })
 
   }
@@ -120,7 +134,10 @@ class TransferCoin extends Component {
     let myInputstyle = { width: 200, height: 40, marginRight: 100,borderStyle: 'groove' }
     return (
       <div>
-        <Button style={ {background:'#1EA896',color:'white'}} floated='right' onClick={this.show(true)}> Reward Coins <i class="right chevron icon"></i></Button>
+        {this.props.activeUser._id!=this.props.selectedUser._id?
+        <div>
+        <Button style={ {background:'#1EA896',color:'white'}} floated='right' onClick={this.show(true)}> Reward Coins 
+          <i class="right chevron icon"></i></Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}
          style={{ width: 700, height: 500, marginLeft: 300, marginTop: 100, borderStyle: 'groove' }}>
           <Modal.Header ><i class="gift icon"></i>Rewards Coins</Modal.Header>
@@ -221,7 +238,9 @@ class TransferCoin extends Component {
               </GridColumn>
             </Grid>
           </Modal.Actions>
-        </Modal>
+        </Modal></div>:
+       <div><Popup content='Cannot transfer coins to yourself' trigger={<div><Button disabled style={ {background:'#1EA896',color:'white'}} floated='right' onClick={this.show(true)}> Reward Coins 
+       <i class="right chevron icon"></i></Button></div>}/></div>}
       </div>
     )
   }

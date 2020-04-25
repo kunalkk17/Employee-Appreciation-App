@@ -9,6 +9,7 @@ import UserProfile from './UserProfile'
 import Logo from './../Images/img.jpg'
 import Logo2 from './../Images/img4.png'
 import CoinHistory from './CoinHistory.js'
+import RewardsHistory from './RewardsHistory'
 import TransferCoin from './TransferCoin'
 
 
@@ -130,13 +131,16 @@ class Profile extends React.Component<{}, UserState> {
     <Modal.Header>
       <Image wrapped size='tiny' src={Logo} />
       {this.state.usersData[this.state.userProfileIndexToShow].name}<div>
-        <Label>IT Department</Label><Label>Employee Id : {item.employeeId}</Label>
+        <Label>IT Department</Label><Label>Employee Id : {this.state.usersData[this.state.userProfileIndexToShow].employeeId}</Label>
+        <Label style={{background: "rgb(212, 194, 25)",color: "white"}}>
+          <i class="copyright icon"></i> {this.state.usersData[this.state.userProfileIndexToShow].rewards} Coins 
+        </Label>
         </div></Modal.Header>
     <Modal.Content image>
       
       <Modal.Description>
         <Header>Rewards History</Header>
-       <CoinHistory/>
+       <RewardsHistory rewardsHistory={this.state.usersData[this.state.userProfileIndexToShow].rewardsHistory}/>
       </Modal.Description>
     </Modal.Content>
     <Modal.Actions>

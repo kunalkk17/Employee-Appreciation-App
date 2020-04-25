@@ -179,8 +179,8 @@ router.post("/login", (req, res) => {
     console.log("=========Req.Body=======",req.body)
     var name = req.body.name
     var email = req.body.email
-    var message = req.body.message
-    var content = `name: ${name} \n email: ${email} \n message: ${message} `
+    //var message = req.body.message
+    var content = req.body.content
     //console.log("Req.body.Namer",eq.body.name)
 
     var mail = {

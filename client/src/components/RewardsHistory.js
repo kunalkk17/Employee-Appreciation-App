@@ -30,18 +30,19 @@ class RewardsHistory extends Component {
         }
       }
   render() {
+    console.log("========Selected User=======", this.props.rewardsHistory)
     return (
       <div class="rewards-history">
         {/* <h3>Rewards History</h3> */}
           <div class="ui list">
             {
-                this.state.rewardsHistory?
-                this.state.rewardsHistory.map((item,i)=>
+                this.props.rewardsHistory?
+                this.props.rewardsHistory.map((item,i)=>
                 
            <div class="item">
              <img class="ui avatar image" src={Logo} tiny/>
                <div class="content">
-                 <span><b style={{display:"inline"}}class="header">{item.givenBy} </b> Gifted {item.noOfCoins} coins</span>
+                 <span><b style={{display:"inline"}}class="header">{item.senderName} </b> Gifted {item.noOfCoins} coins</span>
                     <div class="description">{item.reason}</div>
               </div>
           </div>
