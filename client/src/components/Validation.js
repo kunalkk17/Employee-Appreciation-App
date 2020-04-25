@@ -4,23 +4,23 @@ const isEmpty = require("is-empty");
  export const  ValidateTransferCoinData=(data)=>{
    console.log(data,'validate data')
     let errors={ 
-    CoinsErr: '',
-    CommentErr: '',
-    OptionValuErr:''}
+    coinsErr: '',
+    commentErr: '',
+    optionValuErr:''}
     
 
-if (data.OptionValue==='') {
-  errors.OptionValuErr = "Please Select one option";
+if (data.optionValue==='') {
+  errors.optionValuErr = "Please Select one option";
 } 
 if(data.comment==='')
 {
-  errors.CommentErr ='Comment field can not be empty'
+  errors.commentErr ='comment field can not be empty'
 }
-if(data.Coins==='')
+if(data.coins==='')
 {
-  errors.CoinsErr ='Coins field can not be empty'
+  errors.coinsErr ='coins field can not be empty'
 }
-if(errors.OptionValuErr==="" && errors.CommentErr==="" && errors.CoinsErr===""){
+if(errors.optionValuErr==="" && errors.commentErr==="" && errors.coinsErr===""){
   errors = {}
   console.log(errors,'validation error')
 }
