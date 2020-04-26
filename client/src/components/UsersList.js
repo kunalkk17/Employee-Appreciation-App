@@ -68,6 +68,7 @@ class Profile extends React.Component<{}, UserState> {
     this.setState({
       usersData: this.state.users.slice(this.state.begin, this.state.end),
     });
+    console.log(this.state);
   }
 
   show = (dimmer,userProfileindex) => () => {

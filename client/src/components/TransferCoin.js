@@ -31,7 +31,7 @@ class TransferCoin extends Component {
         err.coinsErr =  value >5 ? "Can not Gift More than 5 coins" : "";
         break;
       case "comment":
-        err.commentErr = value.length >50 ? " Comment should not be more than 50 words " : "";
+        err.commentErr = value.length >100 ? " Comment should not be more than 50 words " : "";
         break;
       default:
         break;
@@ -99,7 +99,8 @@ class TransferCoin extends Component {
       }
       const mailBody={
         name:this.props.activeUser.name,
-        email:this.props.selectedUser.emailId,
+        //email:"this.props.selectedUser.emailId",
+        email:"klassykunnu@gmail.com",
         content:`Viola!!!!!\n ${this.props.activeUser.name} has rewarded you with ${coins} coins because ${this.state.optionValue}`
       }
 
@@ -130,8 +131,9 @@ class TransferCoin extends Component {
   render() {
     const { open, dimmer } = this.state
     //let userName = this.props.recieverName;
-    console.log(this.props, 'hi') 
+    //console.log(this.props, 'hi') 
     let myInputstyle = { width: 200, height: 40, marginRight: 100,borderStyle: 'groove' }
+    let radioStyle ={display:"flex" , textAlign:"left"}
     return (
       <div>
         {this.props.activeUser._id!=this.props.selectedUser._id?
@@ -179,7 +181,7 @@ class TransferCoin extends Component {
                   <Divider></Divider>
                   <Form.Input>
                     <Radio
-                      style={{ display: 'flex',textAlign:'left' }}
+                      style={radioStyle}
                       label='Do you belong to same team'
                       name='option'
                       value='Do you belong to same team'
@@ -189,7 +191,7 @@ class TransferCoin extends Component {
                   </Form.Input>
                   <Form.Input>
                     <Radio
-                      style={{ display: 'flex' }}
+                      style={radioStyle}
                       float = 'left'
                       label='Did you previously work with Him/Her'
                       name='option'
@@ -200,7 +202,7 @@ class TransferCoin extends Component {
                   </Form.Input>
                   <Form.Input>
                     <Radio
-                      style={{ display: 'flex' }}
+                      style={radioStyle}
                       float = 'left'
                       label='Are you working on any Integration project with him/her'
                       name='option'
@@ -211,7 +213,7 @@ class TransferCoin extends Component {
                   </Form.Input>
                   <Form.Field>
                     <Radio
-                      style={{ display: 'flex' }}
+                      style={radioStyle}
                       label='Are you Involved in any Organisation policy with Him/her'
                       name='option'
                       value='Are you Involved in any Organisation policy with Him/her'
@@ -221,7 +223,7 @@ class TransferCoin extends Component {
                   </Form.Field>
                   <Form.Field>
                     <Radio
-                      style={{ display: 'flex' }}
+                      style={radioStyle}
                       label='Others'
                       name='option'
                       value='Others'

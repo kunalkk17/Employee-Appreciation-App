@@ -30,7 +30,7 @@ class RewardsHistory extends Component {
         }
       }
   render() {
-    console.log("========Selected User=======", this.props.rewardsHistory)
+    console.log("========Rewards History=======", this.props.rewardsHistory)
     return (
       <div class="rewards-history">
         {/* <h3>Rewards History</h3> */}

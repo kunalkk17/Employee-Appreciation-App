@@ -3,7 +3,7 @@ import {
     Button,Grid,Header, GridColumn, GridRow, Label,
     } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import TransferCoin from './TransferCoin'
+import TransferCoin from '../client/src/components/TransferCoin'
 
 class UserList  extends React.Component
 {
