@@ -31,6 +31,7 @@ class Profile extends React.Component<{}, UserState> {
       end:5,
       open:false,
       userProfileIndexToShow:0,
+      otherUser:"",
       coinHistory:[{
                       givenBy:"Akshita Sharma",
                       noOfCoins:2,
@@ -102,8 +103,18 @@ class Profile extends React.Component<{}, UserState> {
     
   }
 
-
+  handleResultSelect = (e, { result }) => {this.setState({ otherUser: result.name })}
+  handleUser = (e,{value}) => {
+    console.log(value)
+    this.setState({ otherUser: value})
+    
+  }
   render() {
+    const resultRenderer =({name}) =><p><b>{name}</b></p>
+    const filterUserData = this.state.users.filter(user => {
+      return user.name.toLowerCase().includes(this.state.otherUser.toLowerCase())
+    })
+    this.state.usersData = filterUserData.slice(this.state.begin ,this.state.end)
     const numberPages = Math.floor(this.state.totalResults/4);
     const { open, dimmer} = this.state
 
@@ -113,8 +124,12 @@ class Profile extends React.Component<{}, UserState> {
           <div class=" twelve wide column">
           <div class="card-container2">
           <Search placeholder="Search Users"
-            
-          />
+                onSearchChange={this.handleUser}
+                value={this.state.otherUser}
+                onResultSelect={this.handleResultSelect}
+                results={this.state.usersData}
+                resultRenderer={resultRenderer}
+              />
             <div class="ui divided items">
               {
                 this.state.usersData?
