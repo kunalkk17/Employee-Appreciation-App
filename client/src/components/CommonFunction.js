@@ -12,9 +12,9 @@ export const formValid= errors=>{
 }
 
 export const TeamOption =[
-    {text:'NAVFAS' , value:'FAS'},
-  {text:'NAVRTA' , value:'RTA'},
-  {text:'NAVCDS' , value:'CDS'},
+  {text:'NAVFAS' , value:'NAVFAS'},
+  {text:'NAVRTA' , value:'NAVRTA'},
+  {text:'NAVCDS' , value:'NAVCDS'},
   {text:'Partner', value:'Partner'},
   {text:'Main', value:'Main'},
   {text:'Main2', value:'Main2'}]
@@ -34,4 +34,14 @@ export const TeamLeadList= [{
   TeamLead:"Pankaj Sharma"
 }
   
+]
+
+
+export const selectOption =[{text:'Belongs to the Same Team' ,value:"Belongs to the Same Team"},
+{text:'Previously work with Him/Her' ,value:"Previously work with Him/Her"},
+{text:'Working in any Integration project with him/her' ,value:"Working in any Integration project with him/her"},
+{text:'Involve in any Organisation policy with Him/her' ,value:"Involve in any Organisation policy with Him/her"},
+{text:'Others' ,value:"Others"}
+
+
 ]

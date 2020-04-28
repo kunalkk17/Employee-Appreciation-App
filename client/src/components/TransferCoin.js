@@ -1,7 +1,8 @@
 import React, { Component} from 'react'
-import { Button, Modal, Form, Grid, Radio, GridColumn, Divider,Popup } from 'semantic-ui-react'
+import { Button, Modal, Form, Grid, TextArea, GridColumn, Dropdown,Popup } from 'semantic-ui-react'
 import {ValidateTransferCoinData} from './Validation'
 import { transferCoins, sendMail } from './UserFunctions'
+import {selectOption} from './CommonFunction'
 class TransferCoin extends Component {
   constructor(props) {
     super(props)
@@ -31,7 +32,7 @@ class TransferCoin extends Component {
         err.coinsErr =  value >5 ? "Can not Gift More than 5 coins" : "";
         break;
       case "comment":
-        err.commentErr = value.length >100 ? " Comment should not be more than 50 words " : "";
+        err.commentErr = value.length >100 ? " Comment should not be more than 100 words " : "";
         break;
       default:
         break;
@@ -142,7 +143,7 @@ class TransferCoin extends Component {
           <i class="right chevron icon"></i></Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}
          style={{ width: 700, height: 500, marginLeft: 300, marginTop: 100, borderStyle: 'groove' }}>
-          <Modal.Header ><i class="gift icon"></i>Rewards Coins</Modal.Header>
+          <Modal.Header ><i class="gift icon"></i>Reward Coins</Modal.Header>
           <Modal.Actions >
             <Grid columns={2}>
               <GridColumn width={7}>
@@ -164,76 +165,31 @@ class TransferCoin extends Component {
                   />
                   {this.state.errors.coinsErr.length > 0 &&
                     <p style={{marginLeft: '0px !important',color:'red',textAlign:"left",fontSize:"12px"}}>{this.state.errors.coinsErr}</p>}
-                  <Form.TextArea style={{ width: 200, height: 70, marginRight: 100}} type='string' name='comment'
+                 
+                </Form>
+              </GridColumn>
+              <GridColumn>
+                <p style ={{textAlign:'left'}}><b>How are you associate with that person</b></p>
+                {this.state.errors.optionValuErr.length > 0 &&
+                    <p style={{textAlign:'left',color:'red',fontSize:"12px"}}>{this.state.errors.optionValuErr}</p>}
+                  <Dropdown
+                    placeholder='Select'
+                    name="comment"
+                    onChange={this.handleSelectValue}
+                    selection
+                    compact 
+                    options={selectOption}
+                    fluid
+                  ></Dropdown>
+              </GridColumn>
+              <TextArea style={{width:500, height: 90, marginRight: 100 ,marginLeft:15}} type='string' name='comment'
                     placeholder='Comment' min='10' max='60'
                     onChange ={this.handleChange}/>
                   {this.state.errors.commentErr.length > 0 &&
                     <p style={{textAlign:'left',color:'red',fontSize:"12px"}}>{this.state.errors.commentErr}</p>}
-                </Form>
-              </GridColumn>
-              <GridColumn>
-                <Form>
-                  <Form.Input>
-                    <b> Select One Reason</b> 
-                  </Form.Input>
-                 {this.state.errors.optionValuErr.length > 0 &&
-                  <p style={{color:'red',textAlign:"left",fontSize:"12px"}}>{this.state.errors.optionValuErr}</p>}
-                  <Divider></Divider>
-                  <Form.Input>
-                    <Radio
-                      style={radioStyle}
-                      label='Do you belong to same team'
-                      name='option'
-                      value='Do you belong to same team'
-                      checked={this.state.optionValue === 'Do you belong to same team'}
-                      onChange={this.handleSelectValue}
-                    />
-                  </Form.Input>
-                  <Form.Input>
-                    <Radio
-                      style={radioStyle}
-                      float = 'left'
-                      label='Did you previously work with Him/Her'
-                      name='option'
-                      value='Did you previously work with Him/Her'
-                      checked={this.state.optionValue === 'Did you previously work with Him/Her'}
-                      onChange={this.handleSelectValue}
-                    />
-                  </Form.Input>
-                  <Form.Input>
-                    <Radio
-                      style={radioStyle}
-                      float = 'left'
-                      label='Are you working on any Integration project with him/her'
-                      name='option'
-                      value='Are you working on any Integration project with him/her'
-                      checked={this.state.optionValue === 'Are you working on any Integration project with him/her'}
-                      onChange={this.handleSelectValue}
-                    />
-                  </Form.Input>
-                  <Form.Field>
-                    <Radio
-                      style={radioStyle}
-                      label='Are you Involved in any Organisation policy with Him/her'
-                      name='option'
-                      value='Are you Involved in any Organisation policy with Him/her'
-                      checked={this.state.optionValue === 'Are you Involved in any Organisation policy with Him/her'}
-                      onChange={this.handleSelectValue}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Radio
-                      style={radioStyle}
-                      label='Others'
-                      name='option'
-                      value='Others'
-                      checked={this.state.optionValue === 'Others'}
-                      onChange={this.handleSelectValue}
-                    />
-                  </Form.Field>
-                </Form>
-              </GridColumn>
             </Grid>
+
+           
             <Grid columns={2}>
               <GridColumn><Button style={myInputstyle} onClick={this.close}>Cancle</Button></GridColumn>
               <GridColumn><Button style={myInputstyle} color='green' onClick={this.handleSubmitButton}>Submit</Button>
