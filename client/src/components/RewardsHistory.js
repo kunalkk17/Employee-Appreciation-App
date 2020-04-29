@@ -32,18 +32,18 @@ class RewardsHistory extends Component {
   render() {
     console.log("========Rewards History=======", this.props.rewardsHistory)
     return (
-      <div class="rewards-history">
+      <div className="rewards-history">
         {/* <h3>Rewards History</h3> */}
-          <div class="ui list">
+          <div className="ui list">
             {
                 this.props.rewardsHistory?
                 this.props.rewardsHistory.map((item,i)=>
                 
-           <div class="item">
-             <img class="ui avatar image" src={Logo} tiny/>
-               <div class="content">
-                 <span><b style={{display:"inline"}}class="header">{item.senderName} </b> Gifted {item.noOfCoins} coins</span>
-                    <div class="description">{item.reason}</div>
+           <div className="item">
+             <img className="ui avatar image" src={Logo} tiny/>
+               <div className="content">
+                 <span><b style={{display:"inline"}}className="header">{item.senderName} </b> Gifted {item.noOfCoins} coins</span>
+                    <div className="description">{item.comment}</div>
               </div>
           </div>
           ):null}

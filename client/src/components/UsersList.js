@@ -119,10 +119,10 @@ class Profile extends React.Component<{}, UserState> {
     const { open, dimmer} = this.state
 
     return (
-        <div class="ui internally celled grid">
-        <div class="row">
-          <div class=" twelve wide column">
-          <div class="card-container2">
+        <div className="ui internally celled grid">
+        <div className="row">
+          <div className=" twelve wide column">
+          <div className="card-container2">
           <Search placeholder="Search Users"
                 onSearchChange={this.handleUser}
                 value={this.state.otherUser}
@@ -130,16 +130,16 @@ class Profile extends React.Component<{}, UserState> {
                 results={this.state.usersData}
                 resultRenderer={resultRenderer}
               />
-            <div class="ui divided items">
+            <div className="ui divided items">
               {
                 this.state.usersData?
                 this.state.usersData.map((item,i)=>
-                <div class="item">
-                  <div class="ui tiny image">
+                <div className="item">
+                  <div className="ui tiny image">
                     <img src={Logo}/>
                   </div>
-                <div class="content">
-                <a class="header" onClick={this.show(true,i)}>{item.name}</a>
+                <div className="content">
+                <a className="header" onClick={this.show(true,i)}>{item.name}</a>
                 <TransferCoin activeUser={this.state.activeUser} selectedUser={this.state.usersData[i]}></TransferCoin>
                 <Modal dimmer={dimmer} 
                        open={open} 
@@ -149,7 +149,7 @@ class Profile extends React.Component<{}, UserState> {
       {this.state.usersData[this.state.userProfileIndexToShow].name}<div>
         <Label>IT Department</Label><Label>Employee Id : {this.state.usersData[this.state.userProfileIndexToShow].employeeId}</Label>
         <Label style={{background: "rgb(212, 194, 25)",color: "white"}}>
-          <i class="copyright icon"></i> {this.state.usersData[this.state.userProfileIndexToShow].rewards} Coins 
+          <i className="copyright icon"></i> {this.state.usersData[this.state.userProfileIndexToShow].rewards} Coins 
         </Label>
         </div></Modal.Header>
     <Modal.Content image>
@@ -161,16 +161,16 @@ class Profile extends React.Component<{}, UserState> {
     </Modal.Content>
     <Modal.Actions>
       <Button negative onClick={this.closeUserProfile}>
-      <i class='chevron left icon'></i> Back 
+      <i className='chevron left icon'></i> Back 
       </Button>
     </Modal.Actions>
   </Modal>
                   
-                  <div class="meta">
-                    <span class="ui label" >Accounts</span><Label>Employee Id: {item.employeeId}</Label><Label>{item.team}</Label>
-                    <span class="ui label" style={{background: "rgb(212, 194, 25)",color: "white"}}><i class="copyright icon"></i> {item.rewards} Coins </span>
+                  <div className="meta">
+                    <span className="ui label" >{item.department.toUpperCase()}</span><Label>Employee Id: {item.employeeId}</Label><Label>{item.team}</Label>
+                    <span className="ui label" style={{background: "rgb(212, 194, 25)",color: "white"}}><i className="copyright icon"></i> {item.rewards} Coins </span>
                   </div>
-                  <div class="description">
+                  <div className="description">
                     <p></p>
                   </div>
                 </div>
@@ -178,14 +178,14 @@ class Profile extends React.Component<{}, UserState> {
                 ):null
               }
             </div>
-            <Pagination class='center'
+            <Pagination className='center'
           defaultActivePage={1}
           totalPages={Math.ceil(this.state.users.length / 3)}
           onPageChange={this.btnClick}
         />
           </div>
           </div>
-          <div class="four wide column">
+          <div className="four wide column">
            <UserProfile activeUser={this.state.activeUser}/>
         </div>
       </div>
