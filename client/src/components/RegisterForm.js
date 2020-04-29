@@ -50,7 +50,7 @@ class RegisterForm extends React.Component {
         errors.employeeIdErr = !EmpCodeRegex.test(value) && value.length > 0 ? "Invalid Employee code should contains numbers only " : "";
         break;
       case "userName":
-        errors.userNameErr = value.length > 10 && value.length > 0 ? "Department Name should be in short form  " : "";
+        errors.userNameErr = value.length > 10 && value.length > 0 ? "UserName Name should be in short form  " : "";
         break;
       case "team":
         console.log(TeamLeadList)

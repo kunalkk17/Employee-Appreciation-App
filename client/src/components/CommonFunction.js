@@ -26,11 +26,11 @@ export const TeamOption =[
    
   ]
 export const TeamLeadList= [{
- Team:'FAS',
+ Team:'NAVFAS',
  TeamLead:'Anil Kumar Modest'
 },
 {
-  Team:'RTA',
+  Team:'NAVRTA',
   TeamLead:"Pankaj Sharma"
 }
   
