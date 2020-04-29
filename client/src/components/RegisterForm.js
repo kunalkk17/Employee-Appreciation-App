@@ -201,7 +201,7 @@ class RegisterForm extends React.Component {
                   </Form.Input>
                 </GridColumn>
 
-              </Grid>
+              </Grid><br></br>
               <Form.Input
                 name="email"
                 fluid

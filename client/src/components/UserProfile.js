@@ -50,15 +50,15 @@ class Profile extends Component {
     
     
     return (
-      <div class="card-container">
+      <div className="card-container">
 
-		<div class="upper-container">
-			<div class="image-container">
+		<div className="upper-container">
+			<div className="image-container">
 				<img src={Logo} />
 			</div>
 		</div>
 
-		<div class="lower-container">
+		<div className="lower-container">
 			<div>
 				<h3>{this.props.activeUser.name}</h3>
     <div style={{textAlign:"center"}}><Label>IT Department</Label><Label>Employee Id : {this.props.activeUser.employeeId}</Label></div>
@@ -69,7 +69,7 @@ class Profile extends Component {
 			</div>
 			<div>
 				<span>
-        <label class="btn"> <i class="copyright icon"></i>{this.props.activeUser.rewards} Coins</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="#" class="btn"> <i class="copyright icon"></i>{this.props.activeUser.coinBalance} Coins</a>
+        <label className="btn"> <i className="copyright icon"></i>{this.props.activeUser.rewards} Coins</label>&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="#" className="btn"> <i className="copyright icon"></i>{this.props.activeUser.coinBalance} Coins</a>
         </span>
 			</div>
       {this.state.showRewards?<div><Button style={activated} onClick={this.handleClick}>Show Rewards</Button>

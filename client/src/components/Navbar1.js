@@ -10,14 +10,14 @@ class Landing extends Component {
 
   render() {
     const loginRegLink = (
-        <div class="ui fluid small inverted menu">
-          <Link to="/" class="item active">
+        <div className="ui fluid small inverted menu">
+          <Link to="/" className="item active">
             About
           </Link>
-          <Link to="/login" class="item ">
+          <Link to="/login" className="item ">
             Login
           </Link>
-          <Link to="/register" class="item">
+          <Link to="/register" className="item">
             Register
           </Link>
           </div>
@@ -25,24 +25,24 @@ class Landing extends Component {
     )
 
     const userLink = (
-        <div class="ui fluid small inverted menu">
-          <Link to="/home" class="item"><i class="home icon"></i>
+        <div className="ui fluid small inverted menu">
+          <Link to="/home" className="item"><i className="home icon"></i>
             Home
           </Link>
-          <Link to="/about" class="item"><i class="info icon"></i>
+          <Link to="/about" className="item"><i className="info icon"></i>
             About
           </Link>
-          {/* <div class="ui category search item">
-                <div class="ui icon input">
-                  <input class="prompt" type="text" placeholder="Search users..."/>
-                  <i class="search icon"></i>
+          {/* <div className="ui category search item">
+                <div className="ui icon input">
+                  <input className="prompt" type="text" placeholder="Search users..."/>
+                  <i className="search icon"></i>
                 </div>
-                <div class="results"></div>
+                <div className="results"></div>
               </div> */}
-              <div class="right menu">
-              <div class="item">
-              <div class="ui right floated primary button" onClick={this.logOut.bind(this)} style={ {background:'#1EA896',color:'white'}}>
-              <i class="sign out alternate icon"></i>
+              <div className="right menu">
+              <div className="item">
+              <div className="ui right floated primary button" onClick={this.logOut.bind(this)} style={ {background:'#1EA896',color:'white'}}>
+              <i className="sign out alternate icon"></i>
                               Sign out
                             </div>
                   
