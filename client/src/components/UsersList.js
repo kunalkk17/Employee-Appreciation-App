@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode'
 import { getUsers } from './UserFunctions'
+import { Bar, Pie } from 'react-chartjs-2'
 import axios from 'axios'
-import {Pagination, PaginationProps, Label} from 'semantic-ui-react';
-import { Search, Grid, Header, Segment, Modal, Image,Button,Icon } from 'semantic-ui-react'
+import { Pagination, PaginationProps, Label } from 'semantic-ui-react';
+import { Search, Grid, Header, Segment, Modal, Image, Button, Icon } from 'semantic-ui-react'
 import _ from 'lodash'
 import UserProfile from './UserProfile'
 import Logo from './../Images/img.jpg'
@@ -25,36 +26,36 @@ class Profile extends React.Component<{}, UserState> {
   constructor() {
     super()
     this.state = {
-      users:[],
-      usersData:[],
-      begin:0,
-      end:5,
-      open:false,
-      userProfileIndexToShow:0,
-      otherUser:"",
-      coinHistory:[{
-                      givenBy:"Akshita Sharma",
-                      noOfCoins:2,
-                      reason:"Helped in service generation"
-                   },
-                   {
-                    givenBy:"Kunal Kumar",
-                    noOfCoins:1,
-                    reason:"Helped in service generation"
-                 },
-                 {
-                  givenBy:"Shefali Gupta",
-                  noOfCoins:2,
-                  reason:"Helped in service generation"
-                 },
-                {
-                givenBy:"Ankit Kumar",
-                noOfCoins:2,
-                reason:"Helped in service generation"
-                },
-    ],
-    activeUser:{},
-    isTransfercoin:false
+      users: [],
+      usersData: [],
+      begin: 0,
+      end: 5,
+      open: false,
+      userProfileIndexToShow: 0,
+      otherUser: "",
+      coinHistory: [{
+        givenBy: "Akshita Sharma",
+        noOfCoins: 2,
+        reason: "Helped in service generation"
+      },
+      {
+        givenBy: "Kunal Kumar",
+        noOfCoins: 1,
+        reason: "Helped in service generation"
+      },
+      {
+        givenBy: "Shefali Gupta",
+        noOfCoins: 2,
+        reason: "Helped in service generation"
+      },
+      {
+        givenBy: "Ankit Kumar",
+        noOfCoins: 2,
+        reason: "Helped in service generation"
+      },
+      ],
+      activeUser: {},
+      isTransfercoin: false
     }
     this.btnClick = this.btnClick.bind(this);
   }
@@ -63,17 +64,17 @@ class Profile extends React.Component<{}, UserState> {
     event: React.MouseEvent<HTMLAnchorElement>,
     data: PaginationProps
   ) {
-    await this.setState({activePage: data.activePage});
-    await this.setState({begin: this.state.activePage * 5 - 5});
-    await this.setState({end: this.state.activePage * 5});
+    await this.setState({ activePage: data.activePage });
+    await this.setState({ begin: this.state.activePage * 5 - 5 });
+    await this.setState({ end: this.state.activePage * 5 });
     this.setState({
       usersData: this.state.users.slice(this.state.begin, this.state.end),
     });
     console.log(this.state);
   }
 
-  show = (dimmer,userProfileindex) => () => {
-    this.setState({ dimmer, open: true, userProfileIndexToShow:userProfileindex })
+  show = (dimmer, userProfileindex) => () => {
+    this.setState({ dimmer, open: true, userProfileIndexToShow: userProfileindex })
     console.log(userProfileindex)
   }
 
@@ -89,108 +90,141 @@ class Profile extends React.Component<{}, UserState> {
       if (res) {
         console.log(res.length)
         this.setState({
-          users:res,
-          usersData:res.slice(this.state.begin,this.state.end),
+          users: res,
+          usersData: res.slice(this.state.begin, this.state.end),
         })
-        console.log(this.state.users);
-        const user = this.state.users.find((user)=>user._id===decoded.id);
+        console.log(this.state.users, "users");
+        console.log(this.state.usersData, "usersData");
+        const user = this.state.users.find((user) => user._id === decoded.id);
         this.setState({
-          activeUser:user
+          activeUser: user
         })
         console.log(this.state.activeUser)
       }
     })
-    
+
   }
 
-  handleResultSelect = (e, { result }) => {this.setState({ otherUser: result.name })}
-  handleUser = (e,{value}) => {
+  handleResultSelect = (e, { result }) => { this.setState({ otherUser: result.name }) }
+  handleUser = (e, { value }) => {
     console.log(value)
-    this.setState({ otherUser: value})
-    
+    this.setState({ otherUser: value })
+
   }
   render() {
-    const resultRenderer =({name}) =><p><b>{name}</b></p>
+    const resultRenderer = ({ name }) => <p><b>{name}</b></p>
     const filterUserData = this.state.users.filter(user => {
       return user.name.toLowerCase().includes(this.state.otherUser.toLowerCase())
     })
-    this.state.usersData = filterUserData.slice(this.state.begin ,this.state.end)
-    const numberPages = Math.floor(this.state.totalResults/4);
-    const { open, dimmer} = this.state
+    this.state.usersData = filterUserData.slice(this.state.begin, this.state.end)
+    const numberPages = Math.floor(this.state.totalResults / 4);
+    const { open, dimmer } = this.state
+    var chartOptions = {
+      showScale: true,
+      pointDot: true,
+      showLines: false,
+      title: {
+        display: true,
+        text: 'RewardCoins'
+      },
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 50,
+          fontSize: 10,
+          fontColor: '#bbb',
+          padding: 5,
 
+        }
+      }
+    }
     return (
-        <div className="ui internally celled grid">
+      <div className="ui internally celled grid">
         <div className="row">
           <div className=" twelve wide column">
-          <div className="card-container2">
-          <Search placeholder="Search Users"
+            <div className="card-container2">
+              <Search placeholder="Search Users"
                 onSearchChange={this.handleUser}
                 value={this.state.otherUser}
                 onResultSelect={this.handleResultSelect}
                 results={this.state.usersData}
                 resultRenderer={resultRenderer}
               />
-            <div className="ui divided items">
-              {
-                this.state.usersData?
-                this.state.usersData.map((item,i)=>
-                <div className="item">
-                  <div className="ui tiny image">
-                    <img src={Logo}/>
-                  </div>
-                <div className="content">
-                <a className="header" onClick={this.show(true,i)}>{item.name}</a>
-                <TransferCoin activeUser={this.state.activeUser} selectedUser={this.state.usersData[i]}></TransferCoin>
-                <Modal dimmer={dimmer} 
-                       open={open} 
-                       onClose={this.closeUserProfile}>
-    <Modal.Header>
-      <Image wrapped size='tiny' src={Logo} />
-      {this.state.usersData[this.state.userProfileIndexToShow].name}<div>
-        <Label>IT Department</Label><Label>Employee Id : {this.state.usersData[this.state.userProfileIndexToShow].employeeId}</Label>
-        <Label style={{background: "rgb(212, 194, 25)",color: "white"}}>
-          <i className="copyright icon"></i> {this.state.usersData[this.state.userProfileIndexToShow].rewards} Coins 
-        </Label>
-        </div></Modal.Header>
-    <Modal.Content image>
-      
-      <Modal.Description>
-        <Header>Rewards History</Header>
-       <RewardsHistory rewardsHistory={this.state.usersData[this.state.userProfileIndexToShow].rewardsHistory}/>
-      </Modal.Description>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button negative onClick={this.closeUserProfile}>
-      <i className='chevron left icon'></i> Back 
-      </Button>
-    </Modal.Actions>
-  </Modal>
-                  
-                  <div className="meta">
-                    <span className="ui label" >{item.department.toUpperCase()}</span><Label>Employee Id: {item.employeeId}</Label><Label>{item.team}</Label>
-                    <span className="ui label" style={{background: "rgb(212, 194, 25)",color: "white"}}><i className="copyright icon"></i> {item.rewards} Coins </span>
-                  </div>
-                  <div className="description">
-                    <p></p>
-                  </div>
-                </div>
+              <div class="ui divided items">
+                {
+                  this.state.usersData ?
+                    this.state.usersData.map((item, i) =>
+                      <div className="item">
+                        <div className="ui tiny image">
+                          <img src={Logo} />
+                        </div>
+                        <div className="content">
+                          <a className="header" onClick={this.show(true, i)}>{item.name}</a>
+                          <TransferCoin activeUser={this.state.activeUser} selectedUser={this.state.usersData[i]}></TransferCoin>
+                          <Modal dimmer={dimmer}
+                            open={open}
+                            onClose={this.closeUserProfile}>
+                            <Modal.Header>
+                              <Image wrapped size='tiny' src={Logo} />
+                              {this.state.usersData[this.state.userProfileIndexToShow].name}<div>
+                                <Label>IT Department</Label><Label>Employee Id : {this.state.usersData[this.state.userProfileIndexToShow].employeeId}</Label>
+                                <Label style={{ background: "rgb(212, 194, 25)", color: "white" }}>
+                                  <i class="copyright icon"></i> {this.state.usersData[this.state.userProfileIndexToShow].rewards} Coins
+                                </Label>
+                                <Bar data={{
+                                  labels: ["Platinum", "Gold", "Silver"],
+                                  datasets: [{
+                                    label: "Reward Coins",
+                                    data: [this.state.usersData[this.state.userProfileIndexToShow].rewardCoinType.Platinum
+                                      , this.state.usersData[this.state.userProfileIndexToShow].rewardCoinType.Gold,
+                                    this.state.usersData[this.state.userProfileIndexToShow].rewardCoinType.Silver, 0],
+                                    backgroundColor: [
+                                      'teal',
+                                      "#DAA520",
+                                      'Silver']
+                                  }]
+                                }} width="50" height="10"></Bar>
+                        </div>
+                              </Modal.Header>
+                            <Modal.Content image>
+
+                              <Modal.Description>
+                                <Header>Rewards History</Header>
+                                <RewardsHistory rewardsHistory={this.state.usersData[this.state.userProfileIndexToShow].rewardsHistory} />
+                              </Modal.Description>
+                            </Modal.Content>
+                            <Modal.Actions>
+                              <Button negative onClick={this.closeUserProfile}>
+                                <i className='chevron left icon'></i> Back
+                               </Button>
+                            </Modal.Actions>
+                          </Modal>
+
+                          <div className="meta">
+                            <span className="ui label" >Accounts</span><Label>Employee Id: {item.employeeId}</Label><Label>{item.team}</Label>
+                            <span className="ui label" style={{ background: "rgb(212, 194, 25)", color: "white" }}><i class="copyright icon"></i> {item.rewards} Coins </span>
+                          </div>
+                          <div className="description">
+                            <p></p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null
+                }
               </div>
-                ):null
-              }
-            </div>
             <Pagination className='center'
-          defaultActivePage={1}
-          totalPages={Math.ceil(this.state.users.length / 3)}
-          onPageChange={this.btnClick}
-        />
+              defaultActivePage={1}
+              totalPages={Math.ceil(this.state.users.length / 3)}
+              onPageChange={this.btnClick}
+            />
           </div>
-          </div>
-          <div className="four wide column">
-           <UserProfile activeUser={this.state.activeUser}/>
         </div>
-      </div>
-      </div>
-    )
+        <div className="four wide column">
+          <UserProfile activeUser={this.state.activeUser} />
+          </div>
+        </div>
+        </div>
+  )
   }
 }
 
