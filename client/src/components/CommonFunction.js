@@ -20,9 +20,9 @@ export const TeamOption =[
   {text:'Main2', value:'Main2'}]
   
  export const DeptOption=[
-    { key:1,text:'IT' , value:'it'},
-    {key:2,text:'Hr' , value:'hr'},
-    {key:3,text:'Accounting' , value:'accounting'},
+    { key:1,text:'IT' , value:'IT'},
+    {key:2,text:'Hr' , value:'HR'},
+    {key:3,text:'Accounting' , value:'Acccounting'},
    
   ]
 export const TeamLeadList= [{

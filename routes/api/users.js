@@ -137,17 +137,21 @@ router.post("/login", (req, res) => {
       });
     }
   });
-
   router.post('/transfercoins',(req,res)=>{
     console.log("REQ BODY :", req.body);
     const recieverData= req.body.reciever;
     const senderData= req.body.sender;
     console.log("reciever: ",recieverData);
     console.log("sender: ",senderData);
-    recieverId=recieverData._id;
-    senderId=senderData._id;
+    recieverId=senderData.coinHistory.recieverId;
+    senderId=recieverData.rewardsHistory.senderId;
+    console.log("reciever: ",recieverId);
+    console.log("sender: ",senderId);
+    let updateSenderData={ $set:{coinBalance:senderData.coinBalance,coinType:senderData.coinType},$push:{coinHistory:[senderData.coinHistory]}}
+    let updateRecieverData={ $set:{rewards:recieverData.rewards,rewardCoinType:recieverData.rewardCoinType},$push:{rewardsHistory:[recieverData.rewardsHistory]}}
+
     //Reciever Update
-    User.findByIdAndUpdate(recieverId, recieverData, function(
+    User.findByIdAndUpdate(recieverId, updateRecieverData, function(
       err,
       reciever
     ) {
@@ -157,7 +161,7 @@ router.post("/login", (req, res) => {
       } else {
         console.log("Reciever Updated");
         //Sender Update
-        User.findByIdAndUpdate(senderId, senderData, function(
+        User.findByIdAndUpdate(senderId, updateSenderData, function(
           err,
           sender
         ) {
@@ -165,6 +169,14 @@ router.post("/login", (req, res) => {
             console.log("err", err);
             res.status(500).send(err);
           } else {
+            User.find({},function 
+              (err,user) {if (!user) {
+                return res.status(400).json({ employeeId: "Employee Id is not exists" });
+              }else{
+                return res.json({ employeeId: "Document is updated",user:user})
+              }
+              
+            })
             console.log("Sender Updated");
             const obj={sender,reciever}
             res.send(obj);
