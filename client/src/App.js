@@ -9,6 +9,7 @@ import RegisterForm from './components/RegisterForm'
 
 class App extends Component {
   render() {
+    
     return (
       <Router>
         <div className="App">
@@ -18,6 +19,7 @@ class App extends Component {
             <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/home" component={UsersList} />
+            
             <Route exact path="/about" component={Landing} />
           </div>
         </div>

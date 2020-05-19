@@ -7,7 +7,7 @@ body{
 }
 .card-container{
 	width: 350px;
-	height: 540px;
+	height: 560px;
 	background: #FFF;
 	border-radius: 6px;
 	position: absolute;
@@ -20,7 +20,7 @@ body{
 
 .card-container2{
 	width: 820px;
-	height:540px;
+	height:560px;
 	background-color: #FFF;
 	border-radius: 6px;
 	position: absolute;
@@ -38,7 +38,7 @@ body{
 .image-container{
 	background: white;
 	width: 80px;
-	height: 80px;
+	height: px;
 	border-radius: 50%;
 	/* padding: 5px; */
 	transform: translate(130px,100px);
@@ -90,8 +90,7 @@ body{
 }
 
 .search-bar{
-	width: 700px;
-	left:40px;
+	width: 600px;
 }
 	
 .input{

@@ -44,7 +44,7 @@ export const getUsers = (token) => {
     })
     .then(response => {
       console.log(response)
-      return response.data
+      return response
     })
     .catch(err => {
       console.log(err)
@@ -54,7 +54,10 @@ export const getUsers = (token) => {
 export const transferCoins=(users)=>{
   return axios.post('http://localhost:5000/api/users/transfercoins',users).
   then(response => {
+    console.log(response)
     console.log("Coins Transferred");
+    return response 
+    
   })
 }
 
@@ -63,5 +66,6 @@ export const sendMail=(body)=>{
   then(response => {
     console.log("Mail Sent");
     console.log(response);
+    return response
   })
 }

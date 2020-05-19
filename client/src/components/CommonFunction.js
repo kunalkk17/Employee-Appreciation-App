@@ -33,9 +33,7 @@ export const TeamLeadList= [{
   Team:'NAVRTA',
   TeamLead:"Pankaj Sharma"
 }
-  
 ]
-
 
 export const selectOption =[{text:'Belongs to the Same Team' ,value:"Belongs to the Same Team"},
 {text:'Previously work with Him/Her' ,value:"Previously work with Him/Her"},

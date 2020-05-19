@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { Button, Modal, Form, Grid, TextArea, GridColumn, Dropdown, Popup, Icon, Label } from 'semantic-ui-react'
+import { Button, Modal, Form, Grid, TextArea, GridColumn, Dropdown, Popup, Icon, Label, Image } from 'semantic-ui-react'
 import { ValidateTransferCoinData } from './Validation'
 import { transferCoins, sendMail } from './UserFunctions'
 import { selectOption } from './CommonFunction'
+import platinumcoin from './../Images/platinumcoin.jpg'
+import golf from './../Images/golf.jpg'
+import silver from './../Images/silver.jpg'
+import bronze from './../Images/bronze.jpg'
 class TransferCoin extends Component {
   constructor(props) {
     super(props)
@@ -42,12 +46,12 @@ class TransferCoin extends Component {
     }
     this.setState({ err, [name]: value })
   }
-  handleSelectCion = (e, { value }) => {
+  handleSelectCion(value) {
 
     let { colorType, errors } = this.state
     switch (value) {
       case "Platinum":
-        colorType = "azure";
+        colorType = "gainsboro";
         errors.coinsErr = "";
         break;
       case "Gold":
@@ -55,7 +59,7 @@ class TransferCoin extends Component {
         errors.coinsErr = "";
         break;
       case "Silver":
-        colorType = "#C0C0C0";
+        colorType = "	gray";
         errors.coinsErr = "";
         break;
       default:
@@ -81,7 +85,7 @@ class TransferCoin extends Component {
       this.transfer();
       this.setState({
         coins: '',
-
+        colorType: "",
         coinType: "Gift Coin",
         comment: '',
         optionValue: '',
@@ -132,7 +136,7 @@ class TransferCoin extends Component {
     const mailBody = {
       name: this.props.activeUser.name,
       //email:"this.props.selectedUser.emailId",
-      email: "klassykunnu@gmail.com",
+      email: "shefaligupta2may@gmail.com",
       content: `Viola!!!!!\n ${this.props.activeUser.name} has rewarded you with ${coins} coins because ${this.state.optionValue}`
     }
 
@@ -169,7 +173,6 @@ class TransferCoin extends Component {
     })
 
   }
-
 
   render() {
     const { open, dimmer } = this.state
@@ -208,28 +211,44 @@ class TransferCoin extends Component {
                           <p style={{ marginLeft: 60, color: 'red', textAlign: "left", fontSize: "12px" }}>{this.state.errors.coinsErr}</p>}
                       </Form><br />
                       <Grid columns={3}>
-                        <GridColumn>  {this.props.activeUser.coinType.Platinum > 0 ? <Button circular size="tiny" value='Platinum' onClick={this.handleSelectCion}
-                          style={{ marginLeft: 10, backgroundColor: "azure", borderStyle: 'groove' }}><Label color="red" circular content={this.props.activeUser.coinType.Platinum}>
-                          </Label>Platinum</Button> : <Button disabled circular size="tiny" value='Platinum' onClick={this.handleSelectCion}
-                            style={{ marginLeft: 10, backgroundColor: "azure", borderStyle: 'groove' }}><Label color="red" circular content={this.props.activeUser.coinType.Platinum}>
-                            </Label>Platinum</Button>}</GridColumn>
-                        <GridColumn> {this.props.activeUser.coinType.Gold> 0 ? <Button circular size="tiny" value='Gold' onClick={this.handleSelectCion}
-                          style={{ marginLeft: 15, backgroundColor: "#DAA520", borderStyle: 'groove' }}><Label color="red" circular content={this.props.activeUser.coinType.Gold}>
-                          </Label>Gold</Button> : <Button disabled circular size="tiny" value='Gold' onClick={this.handleSelectCion}
-                            style={{ marginLeft: 15, backgroundColor: "#DAA520", borderStyle: 'groove' }}>
-                            <Label color="red" circular content={this.props.activeUser.coinType.Gold}>
-                            </Label>Gold</Button>}
+                        <GridColumn>  {this.props.activeUser.coinType.Platinum >0 ?
+                          <Image src={platinumcoin} circular onClick={() => this.handleSelectCion("Platinum")}
+                            style={{ marginLeft: 20, border: "5px solid gainsboro" }}>
+                          </Image> :
+                          <Popup
+                            trigger={<Image src={platinumcoin} circular
+                              style={{ marginLeft: 20, border: "5px solid gainsboro" }}>
+                            </Image>}
+                            hoverable style={{ width: 300, height: 40 }}>
+                            <p style={{ color: "red" }}>Your Platinum Coin Balnce is 0!!</p>
+                          </Popup>}
+                          <Label style={{ color: "black", backgroundColor: "gainsboro", borderStyle: 'groove' }}
+                            content={this.props.activeUser.coinType.Platinum}></Label>
                         </GridColumn>
-                        <GridColumn>{this.props.activeUser.coinType.Silver > 0 ?
-                          <Button circular size="tiny" value='Silver' onClick={this.handleSelectCion}
-                            style={{ backgroundColor: "silver", borderStyle: 'groove' }}>
-                            <Label color="red" circular content={this.props.activeUser.coinType.Silver}>
-                            </Label>Silver</Button> :
-                          <Button disabled circular size="tiny" value='Silver' onClick={this.handleSelectCion}
-                            style={{ backgroundColor: "silver", borderStyle: 'groove' }}>
-                            <Label color="red" circular content={this.props.activeUser.coinType.Silver}>
-                            </Label>Silver</Button>}
+                        <GridColumn> {this.props.activeUser.coinType.Gold > 0 ?
+                          <Image src={golf} circular bordered onClick={() => this.handleSelectCion("Gold")}
+                            style={{ marginLeft: 10, border: "5px solid #DAA520" }}></Image> :
+                          <Popup
+                            trigger={<Image src={golf} circular bordered
+                              style={{ marginLeft: 10, border: "5px solid #DAA520" }}></Image>}
+                            hoverable style={{ width: 300, height: 40 }}>
+                            <p style={{ color: "red" }}>Your Gold Coin Balnce is 0!!</p>
+                          </Popup>}
+                          <Label style={{ color: "black", backgroundColor: "#DAA520", borderStyle: 'groove', marginRight: 10 }}
+                            content={this.props.activeUser.coinType.Gold}></Label>
                         </GridColumn>
+                        <GridColumn> {this.props.activeUser.coinType.Silver > 0 ?
+                          <Image src={silver} circular onClick={() => this.handleSelectCion("Silver")}
+                            style={{ marginRight: 30, border: "5px solid 	gray" }}></Image> :
+                          <Popup
+                            trigger={<Image src={silver} circular  b style={{ marginRight: 30, border: "5px solid 	gray" }}></Image>}
+                            hoverable style={{ width: 300, height: 40 }}>
+                            <p style={{ color: "red" }}>Your Silver Coin Balnce is 0!!</p>
+                          </Popup>}
+                          <Label style={{ color: "black", backgroundColor: "gray", borderStyle: 'groove', marginRight: 20 }}
+                            content={this.props.activeUser.coinType.Silver}></Label>
+                        </GridColumn>
+
                       </Grid>
                     </GridColumn>
                     <GridColumn>
